@@ -8,6 +8,7 @@ import os
 #img 폴더 생성 명령
 #html 다 퍼오기
 #유니크한 밸류 저장해놓기
+#test git 
 
 def pageExtracting(url):
     try:
