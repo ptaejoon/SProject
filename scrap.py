@@ -8,7 +8,6 @@ import os
 #img 폴더 생성 명령
 #html 다 퍼오기
 #유니크한 밸류 저장해놓기
-#test git 
 
 def pageExtracting(url):
     try:
@@ -37,12 +36,13 @@ def pageExtracting(url):
 
         qs = soup.find('div',{'class' : "cdtl_capture_img"})
         qs_img = qs.find_all('img')
-        if qs_img is None :
+        if len(qs_img) == 0 :
             qs_img = qs.find_all('iframe')
+
             for img in qs_img:
                 img_src = img.get('src')
                 img_title = img.get('title')
-                img_name = 'img/'+titlename+img_title+'.jpg'
+                img_name = 'img/'+titlename+img_title+'.html'
                 img_src = 'http://www.ssg.com' + img_src
                 urllib.request.urlretrieve(img_src,img_name)
         else :
@@ -55,15 +55,29 @@ def pageExtracting(url):
         #제품 상세설명 이미지 가져오기
         #이미지는 제품명 + 제품상세설명# + .jpg로 저장
         urllib.request.urlretrieve(pd_img_src, pd_img_name)
+
+        #raw html 전부 가져오기
+        raw_name = 'raw/'+titlename+".html"
+        f = open(raw_name,'wb')
+        f.write(soup.get_text().encode('utf-8'))
+        f.close()
+
+        #텍스트 정보 가져오기
+        info = soup.find('div',{'class' : 'cdtl_tbl ty2'})
+        textInfo = info.find_all('div',{'class':'in'})
+        textname = 'text/'+titlename + 'textInfo.txt'
+        f = open(textname,'w')
+        for ti in textInfo:
+            f.write(ti.get_text()+'\n')
+        f.close()
         return 0
-        #제품사진 저장
     except Exception as e:
         print(e)
         print(titlename + 'is not saved')
         f = open("collectedFailed.txt",'a')
         f.write(titlename + "\n" )
         f.close()
-        time.sleep(60)
+        time.sleep(30)
         return 1
 
 def onePageExtracting(url):
@@ -122,5 +136,9 @@ def start():
             src = 'http://www.ssg.com' + item.get('href')
             print(src)
             wholePageExtracting(src)
+paths = {'img/','raw/','text/'}
+for path in paths:
+    if not os.path.exists(path):
+        os.makedirs(path)
 
 start()
