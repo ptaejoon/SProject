@@ -27,7 +27,7 @@ def pageExtracting(url):
         else:
             product_img = product.find('img')
             pd_img_src=product_img.get('src')
-        pd_img_name = 'img/'+titlename+'.jpg'
+        pd_img_name = 'pd_img/'+titlename+'.jpg'
         pd_img_src = 'http:'+pd_img_src
         if os.path.isfile(pd_img_name) is True:
             return 2
@@ -136,9 +136,9 @@ def start():
             src = 'http://www.ssg.com' + item.get('href')
             print(src)
             wholePageExtracting(src)
-paths = {'img/','raw/','text/'}
+paths = {'pd_img/','img/','raw/','text/'}
 for path in paths:
     if not os.path.exists(path):
         os.makedirs(path)
 
-start()
+wholePageExtracting('http://www.ssg.com/disp/category.ssg?ctgId=6000052557')
