@@ -78,9 +78,9 @@ def pageExtracting(url):
         return 0
     except Exception as e:
         print(e)
-        print(titlename + 'is not saved')
+        print(url + 'is not saved')
         f = open("collectedFailed.txt",'a')
-        f.write(titlename + "\n" )
+        f.write(url + "\n" )
         f.close()
         time.sleep(30)
         return 1

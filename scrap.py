@@ -73,9 +73,9 @@ def pageExtracting(url):
         return 0
     except Exception as e:
         print(e)
-        print(titlename + 'is not saved')
+        print(url + 'is not saved')
         f = open("collectedFailed.txt",'a')
-        f.write(titlename + "\n" )
+        f.write(url + "\n" )
         f.close()
         time.sleep(30)
         return 1
@@ -140,5 +140,5 @@ paths = {'pd_img/','img/','raw/','text/'}
 for path in paths:
     if not os.path.exists(path):
         os.makedirs(path)
-
-wholePageExtracting('http://www.ssg.com/disp/category.ssg?ctgId=6000052557')
+onePageExtracting('http://www.ssg.com/disp/category.ssg?ctgId=6000052190&page=8')
+#wholePageExtracting('http://www.ssg.com/disp/category.ssg?ctgId=6000052557')
