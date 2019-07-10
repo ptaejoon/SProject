@@ -121,10 +121,14 @@ def wholePageExtracting(url):
         except requests.exceptions.ConnectionError:
             time.sleep(60)
             continue
-        except Exception as e:
+        except AttributeError as e:
             print("Whole Page Crawling Done")
-            print("Collected Pages : " + str(pageNum))
+            print("CollectedPages : " + str(pageNum))
             break
+        except Exception as e:
+            print("Some Kind of Error Occured")
+            print(e)
+            continue
 
 
 def start():
