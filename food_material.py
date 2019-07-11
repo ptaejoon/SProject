@@ -16,11 +16,13 @@ def main():
 
     base_url = URL + API_KEY + "/" + SERVICE_ID + "/json/"
     request_url = base_url + str(start_index) + "/" + str(end_index)
-
+    
+    # 원재료명 갯수 가져오기
     to_get_last_index = get_food_material(request_url)
     last_index = to_get_last_index[SERVICE_ID]['total_count']
 
     cnt = 0
+    # 처음 리퀘스트 초기화
     start_index = init_startindex
     end_index  = init_endindex
     while start_index < int(last_index):
@@ -33,6 +35,7 @@ def main():
         
         for row in data[SERVICE_ID]['row']:
             
+            # 키 값들 디비 컬럼과 동일
             refined_row = {
                 "id": row["RAWMTRL_CD"],
                 "name": row["RPRSNT_RAWMTRL_NM"],
@@ -49,11 +52,13 @@ def main():
             logging.info(msg)
             cnt += 1
         
+        # 한번에 가져올 원재료명 개수
         start_index += request_limit
         end_index += request_limit
 
         conn.commit()       
 
+# 응답 데이터 json으로 리턴
 def get_food_material(url):
 
     response = requests.get(url)
@@ -68,6 +73,7 @@ def get_food_material(url):
 
     return data
 
+# 원래료 코드명으로 업데이트 및 생성
 def insert_row(data, table):
 
     placeholders = ', '.join(['%s'] * len(data))
