@@ -7,66 +7,71 @@ import re
 import shutil
 from google.cloud import vision
 from konlpy.tag import Kkma
+import boto3
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import tempfile
 
-# 이미지 텍스트 추출
-# 이미지 분류, 텍스트 필요한 부분만 자르기
-# 토큰화
-# Remove stopwords
-# 오타 교정
+TEMP_DIR = 'img3'
 
 def main():
 
-    cnt = 0
+    os.mkdir('./{}'.format(TEMP_DIR))
+    cnt = 1
+    objects = list(bucket.objects.filter(Prefix='img'))
 
-    for file in os.listdir("./img2"):
+    for obj in objects:
+        
+        file = obj.key
+        
+        if file.endswith('.jpg') or file.endswith('.png') or file.endswith('.jpeg'):
 
-        texts = extract_text("./img2/{}".format(file))
+            img_object = bucket.Object(file)
+
+            img_object.download_file("./{}/{}.jpg".format(TEMP_DIR, str(cnt)))
+            cnt += 1
+
+        if cnt > 1000:
+            break
+
+
+    f = open('mat_test.txt', mode='wt', encoding='utf-8')
+    cnt = 1
+
+    for file in os.listdir("./{}".format(TEMP_DIR)):
+
+        texts = extract_text("./{}/{}".format(TEMP_DIR, file))
+        
         if texts:
-
             word_lst = re.split(split_delimeters, texts)
-
             filtered = filter_words(word_lst)
 
             filtered, is_removed = remove_manufaturing_comment(filtered)
+
+            if not image_classification(filtered):
+                continue
+
             filtered_text = " ".join(filtered)
 
             kkma = Kkma()
             tokenization = kkma.nouns(filtered_text)
-
+                
             remove_stop_words = []
             for w in tokenization: 
                 if w not in stop_words and not w.isdigit(): 
-                    remove_stop_words.append(w) 
-            
-            print(remove_stop_words)
+                    remove_stop_words.append(w)
 
-        #     print(texts)
-        #     print('\n')
-        #     print(tokenization)
-        #     if image_classification(tokenization):
-                
-        #         print(tokenization)
-        #         tokenization, is_removed = remove_manufaturing_comment(tokenization)
-        #         print('\n')
-        #         print(tokenization)
-        #     else:
-        #         continue
+            if remove_stop_words:
+                result = str(remove_stop_words)
 
-        # if cnt == 5:
-        #     exit(1)
+                f.write(result)
+                f.write('\n')
 
-        # cnt += 1
+                print("File : {} / Count : {}".format(file, cnt))
+                cnt += 1
 
-        # text_lst = split_word(texts)
-        # if text_lst:
-        #     filtered = filter_words(text_lst)
-        # else:
-        #     continue
-
-        # if image_classification(filtered):
-        #     os.rename("./img/{}".format(file), "./img2/{}".format(file))
-        #     print("{} / count : {}".format(file, cnt))
-        #     cnt += 1
+    f.close()
+    shutil.rmtree("/Users/jisuhan/Desktop/beginvegan/SProject/{}".format(TEMP_DIR))
             
 def extract_text(path):
 
@@ -92,17 +97,6 @@ def image_classification(filtered):
     l2 = set(classify_cri)
     return l1.intersection(l2)    
 
-
-# def split_word(texts):
-
-#     # multi delim으로 text to list
-#     try:
-#         word_lst = re.split(split_delimeters, texts)
-#     except IndexError:
-#         print("Check texts : {}".format(texts))
-#         return None
-
-#     return word_lst
 
 def filter_words(word_lst):
 
@@ -142,6 +136,8 @@ def remove_manufaturing_comment(filtered):
 
 
 if __name__ == "__main__":
+
+
     client = vision.ImageAnnotatorClient()
     split_delimeters = " |,|\(|\)|\.|\||!|\.|\'|\n"
     remove_char = ['|', '', '\n']
@@ -170,4 +166,9 @@ if __name__ == "__main__":
         '주식', '주식회사', '전상', '도', '나트륨', '소', '재지', '백범', '길', '수화물', '원재료명옥', '옥', '호주', '말레이시아', '말레이시아산', '산',
         '스페인', '스페인산',
     ]
+
+    aws_client = boto3.client('s3')
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket('beginveganscrapdata')
+
     main()

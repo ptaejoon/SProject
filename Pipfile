@@ -6,9 +6,15 @@ name = "pypi"
 [dev-packages]
 
 [packages]
+konlpy = "*"
 google-cloud-vision = "*"
-"bs4" = "*"
 pymysql = "*"
+sklearn = "*"
+pandas = "*"
+hgtk = "*"
+jellyfish = "*"
+"boto3" = "*"
+matplotlib = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"
