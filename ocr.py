@@ -21,24 +21,26 @@ def main():
     for file in os.listdir("./img2"):
 
         texts = extract_text("./img2/{}".format(file))
-        if texts:
+        print(texts)
+        print("----------------------------------------")
+        # if texts:
 
-            word_lst = re.split(split_delimeters, texts)
+        #     word_lst = re.split(split_delimeters, texts)
 
-            filtered = filter_words(word_lst)
+        #     filtered = filter_words(word_lst)
 
-            filtered, is_removed = remove_manufaturing_comment(filtered)
-            filtered_text = " ".join(filtered)
+        #     filtered, is_removed = remove_manufaturing_comment(filtered)
+        #     filtered_text = " ".join(filtered)
 
-            kkma = Kkma()
-            tokenization = kkma.nouns(filtered_text)
+        #     kkma = Kkma()
+        #     tokenization = kkma.nouns(filtered_text)
 
-            remove_stop_words = []
-            for w in tokenization: 
-                if w not in stop_words and not w.isdigit(): 
-                    remove_stop_words.append(w) 
+        #     remove_stop_words = []
+        #     for w in tokenization: 
+        #         if w not in stop_words and not w.isdigit(): 
+        #             remove_stop_words.append(w) 
             
-            print(remove_stop_words)
+        #     print(remove_stop_words)
 
         #     print(texts)
         #     print('\n')
@@ -52,10 +54,10 @@ def main():
         #     else:
         #         continue
 
-        # if cnt == 5:
-        #     exit(1)
+        if cnt == 10:
+            exit(1)
 
-        # cnt += 1
+        cnt += 1
 
         # text_lst = split_word(texts)
         # if text_lst:
