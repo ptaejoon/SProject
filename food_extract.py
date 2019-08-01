@@ -35,7 +35,10 @@ def find_most_similar(word_list,jamo_dict,weight):
 	if val < weight:
 		food = ' '
 	return food
-#find_most_similar : jaro distance를 이용해서 들어온 단어와 유저 딕셔너리에 있는 단어 중 가장 유사한것을 출력. 단, 가장 유사값은 0.9를 초과해야함
+#find_most_similar : jaro distance를 이용해서 들어온 단어와 유저 딕셔너리에 있는 단어 중 가장 유사한것을 출력.
+#word_list : 비교하려는 단어
+#damo_dict : user_dic.txt.의 원재료들의 자모 나눔 딕셔너리 jamo_dict['자두'] = 'ㅈㅏㄷㅜ'
+#weight : 가중치. 얼마나 유사해야 출력하는지를 정함
 def percentage_deletion(string):
 	ch = 0
 	while ch < len(string):
@@ -50,7 +53,8 @@ def percentage_deletion(string):
 				break
 		ch = ch+1
 	return string
-			
+# %나 00%등의 글자를 지우는 함수
+
 def spliting(one_string,rewords):
 	one_string = percentage_deletion(one_string)
 	one_string = percentage_deletion(one_string)
@@ -59,8 +63,9 @@ def spliting(one_string,rewords):
 	
 	one_string = one_string.split()
 	return one_string
-
-
+# rewords : replaceword에 들어간 단어들.
+# 이미 걸러진 sentence들 안에서 들어가면 안될 글자들을 걸르는 함수
+# one_string : stopword나 cautionword를 통해 걸러지지 않은 sentence
 		
 def start():
 	jamo_dict = get_jamo()
@@ -74,14 +79,9 @@ def start():
 		while True:
 			oneLine = f.readline()
 			if len(oneLine) is 0 or oneLine is '\n' or oneLine is ' ':
-				break
+				break #빈줄을 처리해주는 예외처리
 			#문장 끝나면 종료
 			#한 문장마다 caution, stop, process에 들어갈지를 결정
-			#kkma = konlpy.tag.Kkma()
-			#komo = konlpy.tag.Komoran(userdic='user_dic.txt')
-			#tw = konlpy.tag.Okt()
-
-			#---------------------------------
 			oneLine = oneLine.replace('\n','') # 코모란 에러 발생 방지. \n이 있으면 토크나이징에서 오류 발생이 가능하다.
 			#print(oneLine)
 			splited_word= komo.morphs(oneLine)
@@ -92,27 +92,27 @@ def start():
 			#kkma.morphs(oneLine)
 			#komo.morphs(oneLine)
 			#tw.morphs(oneLine)
-			#oneLine.replace(',',' ')
-			#splited_word = splited_word.split()
-			# 여기서 띄어쓰기로 split할지 kkma나 komoran 쓸건지 고민
-			filename = str(file).split('/')[1]
+			# 여기서 띄어쓰기로 split할지 kkma나 komoran 쓸건지 결정 가능
+			
+			filename = str(file).split('/')[1] # 제품명을 따옴
 			stop_f = open('stopword_file/'+filename,'a')
 			cau_f = open('caution_file/'+filename,'a')
+
 			for word_list in splited_word:
-				#print(word_list)
 				if word_list in cautionwords:
 					cau_f.write(oneLine+'\n')
 					break
-				#스톱 워드중에서 공장 표시를 얘기하는 것들은 따로 저장해야할 것 같다.
+				#스톱 워드중에서 공장 표시를 얘기하는 것들은 따로 저장
 				if word_list in stopwords:
 				
 					stop_f.write(oneLine+'\n')
 					break
+				#스톱 워드를 포함한 sentence는 따로 저장
 			else:
-				#open_writing_file('processed_file/'+filename)
 				data_file = open('processed_file/'+filename,'a')
-				#non_counter = 0 # 연속적으로 식쟤료 아닌 것 같으면 그 문장 건너뜀
 				data_file.write(oneLine+'\n')
+				#스톱워드를 거른 sentence를 저장 (1차 거름)
+
 				second_data_file = open('processed_file/second/'+filename,'a')
 				splited_data = spliting(oneLine,replacewords)
 				fd_list = []
@@ -121,13 +121,14 @@ def start():
 					if food is not ' ':
 						second_data_file.write(food+' ')
 						fd_list.append(food)
-
+					#임의로 자른 문장에서 식재료 오타교정이 0.9 이상이면 식재료라고 추가
 					splited_word = komo.nouns(sl_data)
 					for word_list in splited_word:
 						food = find_most_similar(word_list,jamo_dict,1.0)
 						if food not in fd_list and food is not ' ':
 							second_data_file.write(food+' ')
 							fd_list.append(food)
+							#형태소 분석기로 자른 문장에서 오타교정이 1.0일때만 식재료라고 추가
 				second_data_file.close()
 				data_file.close()
 			cau_f.close()
@@ -142,6 +143,7 @@ makefolder('stopword_file')
 makefolder('caution_file')
 makefolder('processed_file')
 makefolder('processed_file/second')
+#폴더 없으면 만듬
 
 if os.path.isfile('user_dic.txt') is True:
 	start()
