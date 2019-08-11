@@ -49,6 +49,10 @@ def main():
             url_unit = []
             cnt +=1
 
+        if url_unit_cnt > 10000:
+            logging.info("Test images Done")
+            exit(1)
+
         # Google vision api limit -> 1800/minute
         if url_unit_cnt % 1800 == 0:
             time.sleep(60)
