@@ -8,18 +8,25 @@ from django.shortcuts import render
 
 PAGESIZE = 10
 
-class pdListAPI(APIView):
+class productListAPI(APIView):
     def get(self,request,format = None):
-        pdList = models.Products.objects.all().order_by('-updated_at')
         searchWord = request.GET.get('name')
         if searchWord:
-            pdList = pdList.filter(name__icontains=searchWord)
+            try:
+                pdImage = models.ProductImages.objects.filter(title__icontains=searchWord).order_by('-updated_at')#.filter(name__icontains=searchWord).order_by('-updated_at')
+            except:
+                print("Error Occured During Pulling DB")
+                return Response(data=[],status=status.HTTP_400_BAD_REQUEST)
+            if pdImage.count() == 0:
+                print('No Matched Product')
+                return Response(data=[],status=status.HTTP_404_NOT_FOUND)
             paginator = PageNumberPagination()
             paginator.page_size = PAGESIZE
-            print(searchWord)
-            result_page = paginator.paginate_queryset(pdList, request)
-            serializer = serializers.productSerializer(result_page,many=True)
-            return paginator.get_paginated_response(serializer.data)
+
+            result_page = paginator.paginate_queryset(pdImage, request)
+            productImageserializer = serializers.productImageSerializer(result_page,many=True)
+            #content = {'img':productImageserializer.data,'product':}
+            return paginator.get_paginated_response(productImageserializer.data)
         else:
             print("no search word")
             return Response(data=[],status=status.HTTP_400_BAD_REQUEST)
@@ -33,13 +40,15 @@ class productSPecAPI(ListAPIView):
         if searchWord:
             try:
                 print(searchWord)
-                pdImage = models.ProductImages.objects.all().filter(title=searchWord)
-
+                pdImage = models.ProductImages.objects.filter(title=searchWord)
+                for a in pdImage:
+                    pdnum = a.product
+                    break
+                    #상세 페이지에 들어갈 제품의 products의 id를 가져온다.
             except:
                 print("No Such Product")
                 return Response(data=[], status=status.HTTP_400_BAD_REQUEST)
-
-            pdMat = models.ProductMaterial.objects.all().filter(product_id=1)
+            pdMat = models.ProductMaterial.objects.filter(product_id=pdnum)
             Img_serializer = serializers.productSpecSerializer(pdImage, many=True)
             Mat_serializer = serializers.productMaterialSerializer(pdMat, many=True)
 
