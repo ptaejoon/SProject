@@ -1,0 +1,371 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
+from django.db import models
+
+
+class AccountEmailaddress(models.Model):
+    email = models.CharField(unique=True, max_length=254)
+    verified = models.IntegerField()
+    primary = models.IntegerField()
+    user = models.ForeignKey('UsersUser', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'account_emailaddress'
+
+
+class AccountEmailconfirmation(models.Model):
+    created = models.DateTimeField()
+    sent = models.DateTimeField(blank=True, null=True)
+    key = models.CharField(unique=True, max_length=64)
+    email_address = models.ForeignKey(AccountEmailaddress, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'account_emailconfirmation'
+
+
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=150)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class BvserverPdlist(models.Model):
+    pdid = models.IntegerField(db_column='pdId')  # Field name made lowercase.
+    name = models.CharField(max_length=100)
+    vfullvegan = models.IntegerField(db_column='vFullVegan')  # Field name made lowercase.
+    vvege = models.IntegerField(db_column='vVege')  # Field name made lowercase.
+    vmeat = models.IntegerField(db_column='vMeat')  # Field name made lowercase.
+    vfish = models.IntegerField(db_column='vFish')  # Field name made lowercase.
+    vegg = models.IntegerField(db_column='vEgg')  # Field name made lowercase.
+    vbird = models.IntegerField(db_column='vBird')  # Field name made lowercase.
+    vmilk = models.IntegerField(db_column='vMilk')  # Field name made lowercase.
+    image = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'bvserver_pdlist'
+
+
+class BvserverProductspec(models.Model):
+    pdid = models.IntegerField(db_column='pdId')  # Field name made lowercase.
+    name = models.CharField(max_length=100)
+    brand = models.CharField(max_length=50)
+    material = models.TextField()
+    category = models.CharField(max_length=50)
+    subcategory = models.CharField(db_column='subCategory', max_length=50)  # Field name made lowercase.
+    simproduct1 = models.CharField(db_column='simProduct1', max_length=50)  # Field name made lowercase.
+    simproduct2 = models.CharField(db_column='simProduct2', max_length=50)  # Field name made lowercase.
+    simproduct3 = models.CharField(db_column='simProduct3', max_length=50)  # Field name made lowercase.
+    vfullvegan = models.IntegerField(db_column='vFullVegan')  # Field name made lowercase.
+    vvege = models.IntegerField(db_column='vVege')  # Field name made lowercase.
+    vmeat = models.IntegerField(db_column='vMeat')  # Field name made lowercase.
+    vfish = models.IntegerField(db_column='vFish')  # Field name made lowercase.
+    vegg = models.IntegerField(db_column='vEgg')  # Field name made lowercase.
+    vbird = models.IntegerField(db_column='vBird')  # Field name made lowercase.
+    vmilk = models.IntegerField(db_column='vMilk')  # Field name made lowercase.
+    image = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'bvserver_productspec'
+
+
+class Companies(models.Model):
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'companies'
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey('UsersUser', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
+
+class DjangoContentType(models.Model):
+    app_label = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'
+
+
+class DjangoSite(models.Model):
+    domain = models.CharField(unique=True, max_length=100)
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'django_site'
+
+
+class FoodMat(models.Model):
+    id = models.CharField(primary_key=True, max_length=80)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    eng_nm = models.CharField(max_length=255, blank=True, null=True)
+    category = models.CharField(max_length=255, blank=True, null=True)
+    sub_category = models.CharField(max_length=255, blank=True, null=True)
+    code_name = models.CharField(max_length=255, blank=True, null=True)
+    is_use = models.IntegerField(blank=True, null=True)
+    last_update = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'food_mat'
+
+
+class MaterialCategories(models.Model):
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    sub_category = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'material_categories'
+
+
+class Materials(models.Model):
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    eng_name = models.CharField(max_length=100, blank=True, null=True)
+    code = models.CharField(max_length=100, blank=True, null=True)
+    code_name = models.CharField(max_length=100, blank=True, null=True)
+    is_use = models.IntegerField()
+    raw_last_update = models.DateTimeField(blank=True, null=True)
+    category = models.ForeignKey(MaterialCategories, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'materials'
+
+
+class ProductCategories(models.Model):
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    sub_category = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'product_categories'
+
+
+class ProductImages(models.Model):
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    title = models.CharField(max_length=255, blank=True, null=True)
+    image = models.CharField(max_length=100, blank=True, null=True)
+    product = models.ForeignKey('Products', models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'product_images'
+
+
+class ProductMaterial(models.Model):
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    material = models.ForeignKey(Materials, models.DO_NOTHING)
+    product = models.ForeignKey('Products', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'product_material'
+
+
+class Products(models.Model):
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    category = models.ForeignKey(ProductCategories, models.DO_NOTHING, blank=True, null=True)
+    company = models.ForeignKey(Companies, models.DO_NOTHING, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'products'
+
+
+class RemoveMaterial(models.Model):
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    material = models.ForeignKey(Materials, models.DO_NOTHING)
+    product = models.ForeignKey(Products, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'remove_material'
+
+
+class SocialaccountSocialaccount(models.Model):
+    provider = models.CharField(max_length=30)
+    uid = models.CharField(max_length=191)
+    last_login = models.DateTimeField()
+    date_joined = models.DateTimeField()
+    extra_data = models.TextField()
+    user = models.ForeignKey('UsersUser', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'socialaccount_socialaccount'
+        unique_together = (('provider', 'uid'),)
+
+
+class SocialaccountSocialapp(models.Model):
+    provider = models.CharField(max_length=30)
+    name = models.CharField(max_length=40)
+    client_id = models.CharField(max_length=191)
+    secret = models.CharField(max_length=191)
+    key = models.CharField(max_length=191)
+
+    class Meta:
+        managed = False
+        db_table = 'socialaccount_socialapp'
+
+
+class SocialaccountSocialappSites(models.Model):
+    socialapp = models.ForeignKey(SocialaccountSocialapp, models.DO_NOTHING)
+    site = models.ForeignKey(DjangoSite, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'socialaccount_socialapp_sites'
+        unique_together = (('socialapp', 'site'),)
+
+
+class SocialaccountSocialtoken(models.Model):
+    token = models.TextField()
+    token_secret = models.TextField()
+    expires_at = models.DateTimeField(blank=True, null=True)
+    account = models.ForeignKey(SocialaccountSocialaccount, models.DO_NOTHING)
+    app = models.ForeignKey(SocialaccountSocialapp, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'socialaccount_socialtoken'
+        unique_together = (('app', 'account'),)
+
+
+class UsersUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.IntegerField()
+    is_active = models.IntegerField()
+    date_joined = models.DateTimeField()
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        managed = False
+        db_table = 'users_user'
+
+
+class UsersUserGroups(models.Model):
+    user = models.ForeignKey(UsersUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'users_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class UsersUserUserPermissions(models.Model):
+    user = models.ForeignKey(UsersUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'users_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
+class VegetarianStage(models.Model):
+    created_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
+    stage = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'vegetarian_stage'
+
+
+class VegetarianStageMaterials(models.Model):
+    vegetarianstage = models.ForeignKey(VegetarianStage, models.DO_NOTHING)
+    material = models.ForeignKey(Materials, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'vegetarian_stage_materials'
+        unique_together = (('vegetarianstage', 'material'),)

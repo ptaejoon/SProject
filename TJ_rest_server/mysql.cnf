@@ -1,0 +1,6 @@
+[client]
+database = beginvegan
+host = bvdb.ci3way4ybu42.ap-northeast-2.rds.amazonaws.com
+port = 3306
+user = admin
+password = bv12345678
