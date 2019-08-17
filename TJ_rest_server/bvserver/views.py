@@ -5,7 +5,7 @@ from rest_framework import status
 from . import models, serializers
 from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import render
-
+import json
 PAGESIZE = 10
 
 class productListAPI(APIView):
@@ -49,6 +49,10 @@ class productSPecAPI(ListAPIView):
                 print("No Such Product")
                 return Response(data=[], status=status.HTTP_400_BAD_REQUEST)
             pdMat = models.ProductMaterial.objects.filter(product_id=pdnum)
+            jsonMat = {}
+            for mat in pdMat:
+                jsonMat[mat.material.name] = mat.material.vcategory
+            jsonMat = json.dumps(jsonMat,ensure_ascii=False)
             Img_serializer = serializers.productSpecSerializer(pdImage, many=True)
             Mat_serializer = serializers.productMaterialSerializer(pdMat, many=True)
 

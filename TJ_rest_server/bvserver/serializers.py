@@ -31,14 +31,12 @@ class materialSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Materials
         fields = '__all__'
-
 class productMaterialSerializer(serializers.ModelSerializer):
 
-    product = productSerializer()
     material = materialSerializer()
     class Meta:
         model = models.ProductMaterial
-        fields = '__all__'
+        fields = ('material',)
 
 
 class productSpecSerializer(serializers.ModelSerializer):

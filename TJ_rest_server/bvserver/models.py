@@ -180,27 +180,17 @@ class FoodMat(models.Model):
         db_table = 'food_mat'
 
 
-class MaterialCategories(models.Model):
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    sub_category = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'material_categories'
-
-
 class Materials(models.Model):
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    eng_name = models.CharField(max_length=100, blank=True, null=True)
-    code = models.CharField(max_length=100, blank=True, null=True)
-    code_name = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    eng_name = models.CharField(max_length=255, blank=True, null=True)
+    code_name = models.CharField(max_length=255, blank=True, null=True)
     is_use = models.IntegerField()
     raw_last_update = models.DateTimeField(blank=True, null=True)
-    category = models.ForeignKey(MaterialCategories, models.DO_NOTHING, blank=True, null=True)
+    vcategory = models.CharField(max_length=20, blank=True, null=True)
+    sub_category = models.CharField(max_length=255, blank=True, null=True)
+    category = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -221,8 +211,8 @@ class ProductCategories(models.Model):
 class ProductImages(models.Model):
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
-    title = models.CharField(max_length=255, blank=True, null=True)
-    image = models.CharField(max_length=100, blank=True, null=True)
+    title = models.CharField(unique=True, max_length=255, blank=True, null=True)
+    image = models.CharField(max_length=255, blank=True, null=True)
     product = models.ForeignKey('Products', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
@@ -246,7 +236,7 @@ class Products(models.Model):
     updated_at = models.DateTimeField(blank=True, null=True)
     category = models.ForeignKey(ProductCategories, models.DO_NOTHING, blank=True, null=True)
     company = models.ForeignKey(Companies, models.DO_NOTHING, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(unique=True, max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -311,6 +301,24 @@ class SocialaccountSocialtoken(models.Model):
         managed = False
         db_table = 'socialaccount_socialtoken'
         unique_together = (('app', 'account'),)
+
+
+class TextProcessor(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    path = models.CharField(unique=True, max_length=255, blank=True, null=True)
+    raw_text = models.TextField(blank=True, null=True)
+    num_raw_keywords = models.IntegerField(blank=True, null=True)
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
+    komo_texts = models.TextField(blank=True, null=True)
+    stop_words_texts = models.TextField(blank=True, null=True)
+    caution_words_texts = models.TextField(blank=True, null=True)
+    all_materials = models.TextField(blank=True, null=True)
+    found_materials_texts = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'text_processor'
 
 
 class UsersUser(models.Model):
