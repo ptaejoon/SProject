@@ -7,7 +7,9 @@ const View = styled.View`
   flex: 1;
 `;
 
-const Text = styled.Text``;
+const Text = styled.Text`
+  color: white
+`;
 
 export default () => (
   <View>

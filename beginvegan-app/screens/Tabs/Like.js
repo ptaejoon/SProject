@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import styles from "../../styles";
 
 const View = styled.View`
   justify-content: center;
@@ -7,7 +8,8 @@ const View = styled.View`
   flex: 1;
 `;
 
-const Text = styled.Text``;
+const Text = styled.Text`
+`;
 
 export default () => (
   <View>

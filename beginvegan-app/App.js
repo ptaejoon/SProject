@@ -19,6 +19,9 @@ import { AuthProvider } from "./AuthContext";
 
 
 
+
+
+
 export default function App() {
   const [loaded, setLoaded] = useState(false);
   const [client, setClient] = useState(null);
@@ -28,11 +31,13 @@ export default function App() {
   const preLoad = async () => {
     try {
       await Font.loadAsync({
-        ...Ionicons.font
+        ...Ionicons.font,
+
+        Rancho: require('./assets/font/Rancho-Regular.ttf')
       });
 
 
-      await Asset.loadAsync([require("./assets/BeginVegan.png")]);
+      // await Asset.loadAsync([require("./assets/BeginVegan.png")]);
 
       const cache = new InMemoryCache();
 

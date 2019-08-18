@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import { View, Text, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator, createStackNavigator} from "react-navigation";
 import Search from "../screens/Tabs/Search";
-import Category from "../screens/Tabs/Caregory";
+import Category from "../screens/Tabs/Category";
 import Like from "../screens/Tabs/Like";
 import Profile from "../screens/Tabs/Profile";
 import NavIcon from "../components/NavIcon";
@@ -11,6 +11,10 @@ import { Platform } from "react-native";
 import {Feather} from "@expo/vector-icons";
 import Camera from "../screens/Camera";
 import styles from "../styles";
+import styled from "styled-components";
+
+
+
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator({
@@ -30,11 +34,9 @@ export default createBottomTabNavigator({
 		screen: stackFactory(Search, {
 			title: "Search",
 		  	headerTitle: (
-				<Image
-					style={{height:35}}
-					resizeMode = "contain"
-					source={require("../assets/BeginVegan.png")}
-				/>
+				<Text style={{color:"white", fontSize:27, fontFamily: 'Rancho'}}>
+					BeginVegan
+				</Text>
 		  	)
 		//   headerRight: (
 		// 	<TouchableOpacity>
@@ -50,12 +52,17 @@ export default createBottomTabNavigator({
 	  },
 	Category:{
 		screen: stackFactory(Category, {
-		  title: "Category"
+			title: "Category", 
+			headerTitle: (
+				<Text style={{color:"white"}}>
+					Category
+				</Text>
+			)
 
 		}),
 		navigationOptions: {
         	tabBarIcon: (
-          	<Feather name={"grid"} size= {26} />
+          	<Feather name={"grid"} color="white" size= {26} />
         	)
       	}
 	  },
@@ -72,7 +79,13 @@ export default createBottomTabNavigator({
 
 	Like: {
 		screen: stackFactory(Like, {
-		  title: "Like"
+			title: "Like",
+			headerTitle: (
+				<Text style={{color:"white"}}>
+					Like
+				</Text>
+			)
+			
 		}),
 		navigationOptions: {
         	tabBarIcon: (
@@ -83,7 +96,12 @@ export default createBottomTabNavigator({
 	
 	Profile: {
 		screen: stackFactory(Profile, {
-		  title: "Profile"
+			title: "Profile",
+			headerTitle: (
+				<Text style={{color:"white"}}>
+					Profile
+				</Text>
+			)
 		}),
 		navigationOptions: {
         	tabBarIcon: (

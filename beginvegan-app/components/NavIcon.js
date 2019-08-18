@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import styles from "../styles";
 
-const NavIcon = ({ name, color = styles.blackColor, size = 26 }) => (
+const NavIcon = ({ name, color = "white", size = 26 }) => (
   <Ionicons name={name} color={color} size={size} />
 );
 

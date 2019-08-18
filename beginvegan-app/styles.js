@@ -6,5 +6,6 @@ export default {
     redColor: "#ED4956",
     blueColor: "#3897f0",
     darkBlueColor: "#003569",
-    green:"#6FF98F"
+    green:"#48842e",
+    white:"#FFFFFF"
   };

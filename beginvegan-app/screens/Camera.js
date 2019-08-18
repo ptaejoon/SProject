@@ -13,8 +13,9 @@ const View = styled.View`
   flex: 1;
   justify-content: center;  
   align-items: center;
-  backgroundColor: #6FF98F;
+  backgroundColor: ${styles.green};
 `;
+
 const Icon = styled.View``;
 
 const Button = styled.View`
