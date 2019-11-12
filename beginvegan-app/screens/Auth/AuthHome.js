@@ -12,7 +12,6 @@ const Text = styled.Text``;
 
 export default ({ navigation }) => (
   <View>
-    <Text>BEGIN VEGAN</Text>
     
     <TouchableOpacity onPress={() => navigation.navigate("Login")}>
       <Text>Login</Text>

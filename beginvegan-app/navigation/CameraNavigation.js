@@ -1,6 +1,6 @@
 import React from "react";
 import {createStackNavigator} from "react-navigation";
-import Camera from "../screens/Camera";
+import Camera from "../screens/Camera/Camera";
 import styles from "../styles";
 import NavIcon from "../components/NavIcon";
 import { Platform } from "react-native";

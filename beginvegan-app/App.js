@@ -61,7 +61,7 @@ export default function App() {
       }
 
 
-      setLoaded(true);
+      setLoaded(false);
       setClient(client);
 
 

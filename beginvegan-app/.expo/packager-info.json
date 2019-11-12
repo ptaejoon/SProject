@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 81968,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://72-m34.seobi.beginvegan-app.exp.direct",
   "packagerNgrokUrl": "https://packager.72-m34.seobi.beginvegan-app.exp.direct",
-  "ngrokPid": 81976
+  "ngrokPid": 11330
 }

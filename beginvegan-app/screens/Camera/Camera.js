@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import constants from "../constants";
-import Loader from "../components/Loader";
+import constants from "../../constants";
+import Loader from "../../components/Loader";
 import * as Permissions from "expo-permissions";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity, Platform } from "react-native";
-import styles from "../styles";
+import styles from "../../styles";
 
 const View = styled.View`
   flex: 1;

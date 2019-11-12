@@ -40,7 +40,7 @@ export default class FlatListBasics extends Component {
       if(this.state.data.Mat[i].material.vcategory==="육류"){
         this.setState({meatflag: true})
       }
-      if(this.state.data.Mat[i].material.vcategory==="가금료"){
+      if(this.state.data.Mat[i].material.vcategory==="가금류"){
         this.setState({chickenflag: true})
       }
       if(this.state.data.Mat[i].material.vcategory==="수산물"){

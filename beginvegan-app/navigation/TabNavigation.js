@@ -9,7 +9,7 @@ import Profile from "../screens/Tabs/Profile";
 import NavIcon from "../components/NavIcon";
 import { Platform } from "react-native";
 import {Feather} from "@expo/vector-icons";
-import Camera from "../screens/Camera";
+import Camera from "../screens/Camera/Camera";
 import styles from "../styles";
 import styled from "styled-components";
 
