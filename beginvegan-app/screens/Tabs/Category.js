@@ -23,7 +23,7 @@ export default () => (
 
 
         <View style={styles.imageContainer}>
-            <Box>
+            {/* <Box> */}
             <View style={styles.textWraper}>
                 <TouchableHighlight onPress={this.onPress} underlayColor={custom.green}>
                     <Image source={{uri: "https://www.scienceall.com/nas/image/201204/EMB00000a180d33.bmp"}} 
@@ -32,9 +32,9 @@ export default () => (
                 </TouchableHighlight>
             <Text style={styles.conponent_text}>과일</Text>
             </View>
-            </Box>
+            {/* </Box> */}
 
-            <Box>
+            {/* <Box> */}
             <View style={styles.textWraper}>
             <TouchableOpacity>
             <Image source={{uri: "https://t1.daumcdn.net/liveboard/realfood/4c6470eb049343a89c61067316b9bc58.JPG"}} 
@@ -43,9 +43,9 @@ export default () => (
             </TouchableOpacity>
             <Text style={styles.conponent_text}>채소</Text>
             </View>
-            </Box>
+            {/* </Box> */}
 
-            <Box>
+            {/* <Box> */}
             <View style={styles.textWraper}>
             <TouchableOpacity>
             <Image source={{uri: "http://t1.daumcdn.net/liveboard/realfood/2fefb77f548848e7aba646058fa8bc12.JPG"}} 
@@ -54,7 +54,7 @@ export default () => (
             </TouchableOpacity>
             <Text style={styles.conponent_text}>쌀/잡곡</Text>
             </View>
-            </Box>
+            {/* </Box> */}
 
         </View>
         <View style={styles.imageContainer}>
