@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faSeedling, faCheese, faEgg, faFish, faDrumstickBite, faBacon, faLessThanEqual  } from '@fortawesome/free-solid-svg-icons';
 import {Ionicons, Entypo} from "@expo/vector-icons";
 import axios from "axios";
+import custom from "../../styles";
 
 export default class FlatListBasics extends Component {
 
@@ -26,7 +27,8 @@ export default class FlatListBasics extends Component {
   }
 
   getData = async ()=>{
-    await axios.get("http://localhost:8000/BeginVegan/productSpec/?title="+this.props.name)  
+ //   await axios.get("http://localhost:8000/BeginVegan/productSpec/?title="+this.props.name)
+    await axios.get("http://tj-rest-server-dev.ap-northeast-2.elasticbeanstalk.com/BeginVegan/productSpec/?title="+this.props.name)  
     .then(resp=>{
       this.setState({data: resp.data})
 
@@ -57,9 +59,9 @@ export default class FlatListBasics extends Component {
       }
       
       this.setState(current => (typeof current.materials == 'undefined' ? {materials: this.state.data.Mat[i].material.name} : {materials: current.materials+', '+this.state.data.Mat[i].material.name}));
-      console.log(this.state.data.Mat[i].material.name)
+//      console.log(this.state.data.Mat[i].material.name)
     }
-    console.log(this.state.materials)
+//    console.log(this.state.materials)
   }
 
   render() {
@@ -74,48 +76,58 @@ export default class FlatListBasics extends Component {
           ></Image>
         </View>
 
+        
         <View style={styles.textContainer}>
           <Text style={styles.text}>{this.props.name}</Text>
         </View>
 
         <View style={styles.veganContainer}>
           {this.state.vegflag ?
-          <FontAwesomeIcon icon={faSeedling} color="green" size={40}/> :
-          <FontAwesomeIcon icon={faSeedling} color="red" size={40}/>
+          <FontAwesomeIcon icon={faSeedling} color="green" size={30}/> :
+          <FontAwesomeIcon icon={faSeedling} color="grey" size={30}/>
           }
           {
           this.state.milkflag ?
-          <FontAwesomeIcon icon={faCheese} color="green" size={40}/> :
-          <FontAwesomeIcon icon={faCheese} color="red" size={40}/>
+          <FontAwesomeIcon icon={faCheese} color="green" size={30}/> :
+          <FontAwesomeIcon icon={faCheese} color="grey" size={30}/>
           }
           {
           this.state.eggflag ?
-          <FontAwesomeIcon icon={faEgg} color="green" size= {40} /> :
-          <FontAwesomeIcon icon={faEgg} color="red" size= {40} />
+          <FontAwesomeIcon icon={faEgg} color="green" size= {30} /> :
+          <FontAwesomeIcon icon={faEgg} color="grey" size= {30} />
           }
           {
           this.state.fishflag ?
-          <FontAwesomeIcon icon={faFish} color="green" size= {40} /> :
-          <FontAwesomeIcon icon={faFish} color="red" size= {40} />
+          <FontAwesomeIcon icon={faFish} color="green" size= {30} /> :
+          <FontAwesomeIcon icon={faFish} color="grey" size= {30} />
           }
           {
           this.state.chickenflag ?
-          <FontAwesomeIcon icon={faDrumstickBite} color="green" size= {40} /> :
-          <FontAwesomeIcon icon={faDrumstickBite} color="red" size= {40} />
+          <FontAwesomeIcon icon={faDrumstickBite} color="green" size= {30} /> :
+          <FontAwesomeIcon icon={faDrumstickBite} color="grey" size= {30} />
           }
           {
           this.state.meatflag ?
-          <FontAwesomeIcon icon={faBacon} color="green" size= {40} /> :
-          <FontAwesomeIcon icon={faBacon} color="red" size= {40} />
+          <FontAwesomeIcon icon={faBacon} color="green" size= {30} /> :
+          <FontAwesomeIcon icon={faBacon} color="grey" size= {30} />
           }
 
         </View>
+
+        <View style={styles.splitContainer}>
+
         <View style={styles.matContainer}>
-          <Text style={{fontSize:20}}> 원재료 </Text>
-          <Text style={{fontSize:14}}>{this.state.materials}</Text>
+            <Text style={{fontSize:30, fontFamily: 'Ys', width: constants.width/2,}}> 원재료 </Text>
+            <Text style={{fontSize:14, fontFamily: 'Ys', width: constants.width/2,}}>{this.state.materials}</Text>
+          </View>
+
+          <View style={{backgroundColor:'white', justifyContent:'center', alignContent:'center', alignItems :'center', width: constants.width/2,}}>
+            <Text style={{backgroundColor:'white', fontSize:20, fontFamily: 'Ys'}}> 나에게 적합 </Text>
+          </View>
+
+
 
         </View>
-
 
 
 
@@ -132,28 +144,33 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop:15,
-
+//    paddingTop:15,
+//    borderRadius: 50,
   },
   imageContainer: {
-    width: constants.width,
-    height: constants.height*(1/3),
+//    width: constants.width,
+//    height: constants.height*(1/3),
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flex: 0.5,
+//    borderRadius: 50,
   },
   image: {
     height: 250,
-    width: 200
+    width: 200,
+    borderRadius: 50,
   },
   textContainer:{
     backgroundColor: "white",
     width: constants.width,
     height: constants.height*(1/9),
     justifyContent: 'center',
-    alignItems: 'center'    
+    alignItems: 'center',
+    backgroundColor: "white",
   },
   text:{
-    fontSize: 20
+    fontSize: 35,
+    fontFamily: 'Ys'
   },
   veganContainer:{
     backgroundColor: "white",
@@ -163,16 +180,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 30,
     flexDirection: 'row',
+    borderRadius: 30,
   },
 
   matContainer:{
     backgroundColor: "white",
-    width: constants.width,
+    width: constants.width/2,
     height: constants.height*(1/5),
     justifyContent: 'flex-start',
-    alignItems: 'flex-start' ,
-    paddingRight:15,
-    paddingLeft:15,
+    paddingRight:5,
+    paddingLeft:5,
+    paddingTop:15,
+  },
+
+  splitContainer:{
+    backgroundColor: "white",
+    width: constants.width,
+ //   flex: 3,
+    flexDirection: 'row',
+//    alignItems: 'center',
+//   justifyContent: "flex-end"
   }
   
 })

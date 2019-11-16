@@ -30,14 +30,15 @@ export default class App extends React.Component {
 
   //검색결과를 가지고 오는 함수
   getResult = async search => {
-    await axios.get("http://localhost:8000/BeginVegan/pdList/?name="+this.state.search)  
+  //  await axios.get("http://localhost:8000/BeginVegan/pdList/?name="+this.state.search)  
+    await axios.get("http://tj-rest-server-dev.ap-northeast-2.elasticbeanstalk.com/BeginVegan/pdList/?name="+this.state.search)
     .then(resp=>{
       this.setState({data : resp.data.results});
       this.setState({showList: true})
-      console.log(this.state.showList)
+//      console.log(this.state.showList)
     })  
     .catch(error=>{
-      console.log("error")
+//      console.log("error")
       this.setState({showList: false})
     });
 
@@ -53,16 +54,17 @@ export default class App extends React.Component {
     }
     else{
       await this.setState({showList: false})
-      console.log(search.length)
+ //     console.log(search.length)
     }
     this.setState({showResult: false})
-    console.log(this.state.showList)
+ //   console.log(this.state.showList)
   }
   
   goResult = name =>{
     this.setState({showResult: true})
     this.setState({productName: name})
     this.setState({search: name})
+    //this.props.screenProps.rootNavigation.navigate('SearchResult')
   }
   
   render() {
@@ -82,8 +84,8 @@ export default class App extends React.Component {
       />
       {
         this.state.showResult ?
-        <SearchResult name={this.state.productName}/> :
-
+       <SearchResult name={this.state.productName}/> :
+//          this.props.screenProps.rootNavigation.navigate('SearchResult')  :    
         this.state.showList ? 
         <SearchResultList 
           name={this.state.data.map(

@@ -8,6 +8,7 @@ import * as Permissions from "expo-permissions";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity, Platform } from "react-native";
 import styles from "../../styles";
+import axios from "axios";
 
 const View = styled.View`
   flex: 1;
@@ -38,12 +39,30 @@ export default ({ navigation }) => {
       return;
     }
     try {
+//      console.log(cameraRef.current)
       setCanTakePhoto(false);
       const { uri } = await cameraRef.current.takePictureAsync({
         quality: 1
       });
-      const asset = await MediaLibrary.createAssetAsync(uri);
-      console.log(asset);
+      console.log(uri)
+ //     const asset = await MediaLibrary.createAssetAsync(uri);
+ //     console.log(asset);
+
+      const formData = new FormData()
+      formData.append("img", uri)
+      axios.post("http://tj-rest-server-dev.ap-northeast-2.elasticbeanstalk.com/BeginVegan/materials/", formData, {
+        headers: {
+          "content-type": "multipart/form-data"
+        }
+      })
+      .then(function (response) {
+        //handle success
+        console.log(response);
+    })
+    .catch(function (response) {
+        //handle error
+        console.log(response);
+    });
     } catch (e) {
       console.log(e);
       setCanTakePhoto(true);
@@ -55,6 +74,7 @@ export default ({ navigation }) => {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
       if (status === "granted") {
         setHasPermission(true);
+ //       console.log("okokokok")
       }
     } catch (e) {
       console.log(e);
@@ -73,6 +93,9 @@ export default ({ navigation }) => {
   useEffect(() => {
     askPermission();
   }, []);
+
+
+  
   return (
     <View>
       {loading ? (

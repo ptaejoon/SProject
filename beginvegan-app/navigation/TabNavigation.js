@@ -54,7 +54,7 @@ export default createBottomTabNavigator({
 		screen: stackFactory(Category, {
 			title: "Category", 
 			headerTitle: (
-				<Text style={{color:"white"}}>
+				<Text style={{color:"white", fontSize:27, fontFamily: 'Rancho'}}>
 					Category
 				</Text>
 			)

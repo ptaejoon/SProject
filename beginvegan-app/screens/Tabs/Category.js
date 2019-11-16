@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { FlatList, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native';
 import constants from "../../constants"
+import { TouchableHighlight } from "react-native-gesture-handler";
+import custom from "../../styles";
 
 const View = styled.View`
     justify-content: center;
@@ -12,42 +14,47 @@ const View = styled.View`
 const Text = styled.Text`
 `;
 
+onPress = () => {
+  }
+
 export default () => (
     <View style={styles.container}>
-        <Text style={{fontSize:17}}>카테고리로 찾기</Text>
+        <Text style={{fontSize:20, fontFamily: "Ys"}}>카테고리로 찾기</Text>
+
+
         <View style={styles.imageContainer}>
-
-
+            <Box>
             <View style={styles.textWraper}>
-            <TouchableOpacity>
-            <Image source={{uri: "https://www.scienceall.com/nas/image/201204/EMB00000a180d33.bmp"}} 
-            style={styles.image}
-            />
-            </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>과일</Text>
+                <TouchableHighlight onPress={this.onPress} underlayColor={custom.green}>
+                    <Image source={{uri: "https://www.scienceall.com/nas/image/201204/EMB00000a180d33.bmp"}} 
+                    style={styles.image}
+                    />
+                </TouchableHighlight>
+            <Text style={styles.conponent_text}>과일</Text>
             </View>
+            </Box>
 
-
+            <Box>
             <View style={styles.textWraper}>
             <TouchableOpacity>
             <Image source={{uri: "https://t1.daumcdn.net/liveboard/realfood/4c6470eb049343a89c61067316b9bc58.JPG"}} 
             style={styles.image}
             />
             </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>채소</Text>
+            <Text style={styles.conponent_text}>채소</Text>
             </View>
+            </Box>
 
-
-
+            <Box>
             <View style={styles.textWraper}>
             <TouchableOpacity>
             <Image source={{uri: "http://t1.daumcdn.net/liveboard/realfood/2fefb77f548848e7aba646058fa8bc12.JPG"}} 
             style={styles.image}
             />
             </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>쌀/잡곡</Text>
+            <Text style={styles.conponent_text}>쌀/잡곡</Text>
             </View>
-
+            </Box>
 
         </View>
         <View style={styles.imageContainer}>
@@ -58,7 +65,7 @@ export default () => (
             style={styles.image}
             />
             </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>정육/계란류</Text>
+            <Text style={styles.conponent_text}>정육/계란류</Text>
             </View>
 
 
@@ -69,7 +76,7 @@ export default () => (
             style={styles.image}
             />
             </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>수산물/해산물</Text>
+            <Text style={styles.conponent_text}>수산물/해산물</Text>
             </View>
 
 
@@ -80,7 +87,7 @@ export default () => (
             style={styles.image}
             />
             </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>유제품/냉장/냉동/간편식</Text>
+            <Text style={styles.conponent_text}>유제품/냉장/냉동/간편식</Text>
             </View>
             
             
@@ -94,7 +101,7 @@ export default () => (
             style={styles.image}
             />
             </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>과자/초콜릿/씨리얼/빵</Text>
+            <Text style={styles.conponent_text}>과자/초콜릿/씨리얼/빵</Text>
             </View>
 
 
@@ -105,7 +112,7 @@ export default () => (
             style={styles.image}
             />
             </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>라면/통조림/조미료/장류</Text>
+            <Text style={styles.conponent_text}>라면/통조림/조미료/장류</Text>
             </View>
 
 
@@ -116,7 +123,7 @@ export default () => (
             style={styles.image}
             />
             </TouchableOpacity>
-            <Text style={{textAlign: "center"}}>음료/주류/커피/분유</Text>
+            <Text style={styles.conponent_text}>음료/주류/커피/분유</Text>
             </View>
 
 
@@ -134,7 +141,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-around',
         paddingTop:80,
-        paddingBottom: 60
+        width: '100%',
+        height: '10%',
+    //    paddingBottom: 60
+
     },
     imageContainer:{
         flex: 1,
@@ -142,12 +152,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
-    imageContainerTop:{
-        flex: 1,
-        width: constants.width,
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    },
+
     image: {
         height: 100,
         width: 100,
@@ -157,5 +162,10 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         width: 50,
         backgroundColor: "white"
+    },
+    conponent_text:{
+        textAlign: "center",
+        fontFamily: "Ys",
+        fontSize: 14,
     }
 })
