@@ -201,7 +201,8 @@ class ProductCategories(models.Model):
     created_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
-    sub_category = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
+    category = models.CharField(max_length=255, blank=True, null=True)
+    #sub_category = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
