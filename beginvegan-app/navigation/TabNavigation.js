@@ -44,11 +44,13 @@ export default createBottomTabNavigator({
 		// 	</TouchableOpacity>
 		//   )
 		}),
-		navigationOptions: {
-        	tabBarIcon: (
-          	<NavIcon name={Platform.OS === "ios" ? "ios-search" : "md-search"} />
-        	)
-      	}
+		navigationOptions:{ 
+
+				tabBarIcon: (
+					<NavIcon name={Platform.OS === "ios" ? "ios-search" : "md-search"} />
+				)
+		}
+				
 	  },
 	Category:{
 		screen: stackFactory(Category, {

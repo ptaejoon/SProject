@@ -9,6 +9,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity, Platform } from "react-native";
 import styles from "../../styles";
 import axios from "axios";
+import Photo from "./Photo";
+
 
 const View = styled.View`
   flex: 1;
@@ -34,6 +36,8 @@ export default ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [hasPermission, setHasPermission] = useState(false);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
+  const [takeP,setTakeP] = useState(false);
+
   const takePhoto = async () => {
     if (!canTakePhoto) {
       return;
@@ -61,6 +65,7 @@ export default ({ navigation }) => {
     })
     .catch(function (response) {
         //handle error
+        setTakeP(true);
         console.log(response);
     });
     } catch (e) {
@@ -102,6 +107,10 @@ export default ({ navigation }) => {
         <Loader />
       ) : hasPermission ? (
         <>
+
+
+          {!takeP ?
+
           <Camera
             ref={cameraRef}
             type={cameraType}
@@ -112,7 +121,7 @@ export default ({ navigation }) => {
               height: constants.height *(3/4)
             }}
           >
-            <TouchableOpacity onPress={toggleType}>
+            <TouchableOpacity onPress = {toggleType}>
               <Icon>
                 <Ionicons
                   name={
@@ -125,7 +134,12 @@ export default ({ navigation }) => {
                 />
               </Icon>
             </TouchableOpacity>
-          </Camera>
+          </Camera> :
+
+          <Photo></Photo>
+          }
+
+
           <View>
             <TouchableOpacity onPress={takePhoto} disabled={!canTakePhoto}>
               <Button />

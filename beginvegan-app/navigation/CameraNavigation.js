@@ -23,18 +23,18 @@ export default createStackNavigator(
       }
     }
   },
-  {
-    Photo:{  
-      screen: Photo,
+//   {
+//     Photo:{  
+//       screen: Photo,
       
-      navigationOptions: {
-//        headerTitle: <Text style={{color:"white", fontSize:17}}>제품의 원재료명을 찍어주세요</Text>,
-        headerMode: "float",
-        headerStyle: {
-					backgroundColor: styles.green,
-          borderBottomWidth: 0, //헤더 밑의 줄 제거
-				}
-      }
-    }
-  },
+//       navigationOptions: {
+// //        headerTitle: <Text style={{color:"white", fontSize:17}}>제품의 원재료명을 찍어주세요</Text>,
+//         headerMode: "float",
+//         headerStyle: {
+// 					backgroundColor: styles.green,
+//           borderBottomWidth: 0, //헤더 밑의 줄 제거
+// 				}
+//       }
+//     }
+//   },
 );

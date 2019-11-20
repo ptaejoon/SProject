@@ -23,10 +23,9 @@ export default () => (
 
 
         <View style={styles.imageContainer}>
-            {/* <Box> */}
             <View style={styles.textWraper}>
                 <TouchableHighlight onPress={this.onPress} underlayColor={custom.green}>
-                    <Image source={{uri: "https://www.scienceall.com/nas/image/201204/EMB00000a180d33.bmp"}} 
+                    <Image source={{uri: "https://i.dlpng.com/static/png/455967_preview.png"}} 
                     style={styles.image}
                     />
                 </TouchableHighlight>
@@ -37,7 +36,7 @@ export default () => (
             {/* <Box> */}
             <View style={styles.textWraper}>
             <TouchableOpacity>
-            <Image source={{uri: "https://t1.daumcdn.net/liveboard/realfood/4c6470eb049343a89c61067316b9bc58.JPG"}} 
+            <Image source={{uri: "https://cdn.onlinewebfonts.com/svg/img_354378.png"}} 
             style={styles.image}
             />
             </TouchableOpacity>
@@ -48,7 +47,7 @@ export default () => (
             {/* <Box> */}
             <View style={styles.textWraper}>
             <TouchableOpacity>
-            <Image source={{uri: "http://t1.daumcdn.net/liveboard/realfood/2fefb77f548848e7aba646058fa8bc12.JPG"}} 
+            <Image source={{uri: "https://icon-library.net/images/rice-icon-png/rice-icon-png-1.jpg"}} 
             style={styles.image}
             />
             </TouchableOpacity>
@@ -61,7 +60,7 @@ export default () => (
 
             <View style={styles.textWraper}>
             <TouchableOpacity>
-            <Image source={{uri: "http://gdimg.gmarket.co.kr/755102972/still/600?ver=0"}} 
+            <Image source={{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQCyIWPgY0rsPlGczDDfTYQqLaL793dpCGNfg-K9EvOnwzvoe8I"}} 
             style={styles.image}
             />
             </TouchableOpacity>
@@ -72,7 +71,7 @@ export default () => (
             
             <View style={styles.textWraper}>
             <TouchableOpacity>
-            <Image source={{uri: "http://gohyangfood.com/data/item/1423401192_m"}} 
+            <Image source={{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQLmV8o-I5ISGe6d3Hjolt1FAo97kaSkPFUZlsETaDRW-iCnNZq"}} 
             style={styles.image}
             />
             </TouchableOpacity>
@@ -83,7 +82,7 @@ export default () => (
             
             <View style={styles.textWraper}>
             <TouchableOpacity>
-            <Image source={{uri: "https://previews.123rf.com/images/baibaz/baibaz1603/baibaz160300046/55868581-%EB%AA%A9%EC%A1%B0-%EB%B0%B0%EA%B2%BD%EC%97%90-%EB%8B%A4%EC%96%91-%ED%95%9C-%EC%8B%A0%EC%84%A0%ED%95%9C-%EC%9C%A0%EC%A0%9C%ED%92%88.jpg"}} 
+            <Image source={{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJAk_uRVCBXpwOtfn1N-428_hU2vsGhLZxVou1a58iys6bXO9-"}} 
             style={styles.image}
             />
             </TouchableOpacity>
@@ -97,7 +96,7 @@ export default () => (
 
             <View style={styles.textWraper}>
             <TouchableOpacity>
-            <Image source={{uri: "http://img.danawa.com/prod_img/500000/085/731/img/7731085_1.jpg?shrink=500:500&_v=20190417135418"}} 
+            <Image source={{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRrkpT7d3fu7M2Xq6Tv28Vvt3hRBVBeKPyigZn1ramdGp_keURZ"}} 
             style={styles.image}
             />
             </TouchableOpacity>
@@ -108,7 +107,7 @@ export default () => (
 
             <View style={styles.textWraper}>
             <TouchableOpacity>
-            <Image source={{uri: "http://img.vogue.co.kr/vogue/2018/01/style_5a55dc28c936c.jpg"}} 
+            <Image source={{uri: "https://data.silhouette-ac.com/data/thumbnails/80/803bc2413f8f6f351f0cef6b7d096a6b_t.jpeg"}} 
             style={styles.image}
             />
             </TouchableOpacity>
@@ -119,7 +118,7 @@ export default () => (
 
             <View style={styles.textWraper}>
             <TouchableOpacity>
-            <Image source={{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbOtRlUAExUyg8y69ioBI720ZWXg_1-3PNu3hfUszh4pma0STM"}} 
+            <Image source={{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTBnpoBoZiWe9q_QDiBleLlzXyfH96FlguJKnDWGRYkrnCKZGVm"}} 
             style={styles.image}
             />
             </TouchableOpacity>

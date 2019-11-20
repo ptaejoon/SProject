@@ -121,14 +121,23 @@ export default class FlatListBasics extends Component {
             <Text style={{fontSize:14, fontFamily: 'Ys', width: constants.width/2,}}>{this.state.materials}</Text>
           </View>
 
+
+          <View style={{backgroundColor:"white", flex:0.5, paddingTop: 15, justifyContent:"center"}}>
           <View style={{backgroundColor:'white', justifyContent:'center', alignContent:'center', alignItems :'center', width: constants.width/2,}}>
-            <Text style={{backgroundColor:'white', fontSize:20, fontFamily: 'Ys'}}> 나에게 적합 </Text>
+            <Text style={{backgroundColor:'white',color:"green", fontSize:20, fontFamily: 'Ys'}}> 조인성님에게 적합 </Text>
+          </View>
+          <View style={styles.starContainer}>
+
+            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
+            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
+            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
+            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
+            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
+
+          </View>          
           </View>
 
-
-
         </View>
-
 
 
 
@@ -177,6 +186,16 @@ const styles = StyleSheet.create({
     width: constants.width,
     height: constants.height*(1/7),
     justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 30,
+    flexDirection: 'row',
+    borderRadius: 30,
+  },
+
+  starContainer:{
+    backgroundColor: "white",
+    width: constants.width/2,
+    justifyContent: 'center',
     alignItems: 'center',
     padding: 30,
     flexDirection: 'row',

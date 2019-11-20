@@ -3,9 +3,9 @@ import styled from "styled-components";
 import styles from "../../styles";
 
 const View = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex: 1;
+  padding: 15,
+  width: constants.width,
+  height: constants.height *(3/4)
 `;
 
 const Text = styled.Text`
