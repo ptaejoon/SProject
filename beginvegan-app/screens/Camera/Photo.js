@@ -11,18 +11,20 @@ import custom from "../../styles";
 
 
 
+
 export default class FlatListBasics extends Component {
 
   state = {
     data: [],
     vegflag: true,
-    milkflag: true,
-    eggflag: false,
+    milkflag: false,
+    eggflag: true,
     fishflag: false,
-    chickenflag: true,
+    chickenflag: false,
     meatflag: true,
     imgurl: 'https://ak8.picdn.net/shutterstock/videos/1009250978/thumb/1.jpg',
-    materails: '소갈비, 소고기, 무, 대파, 쇠고기육수, 정제소금, 마늘, L-글루탐산나트륨, 국간장, 후추, 양파, 생강, 고추씨, 감초, 연잎, 진피, 오가피, 우유, 대두, 밀, 쇠고기, 닭고기',
+    materials: '밀, 감자전분, 팜유, 변성전분, 정제염, 아채조미추출물, 산도조절제, 올리고녹차풍미액, 비타민B2, 소고기맛베이스, 매콤양념분말, 간장양념분말, 정백당, 볶음양념분, 조미소고기분말, 간장분말, 후추가루, 조미홍고추분말, 5-리보뉴클레오티드이나트륨, 호박산이나트륨, 대두단백, 건파, 건청경채, 건표고버섯, 건당근, 건고추, 밀, 대두, 돼지고기, 계란, 쇠고기'
+    //materails: '소갈비, 소고기, 무, 대파, 쇠고기육수, 정제소금, 마늘, L-글루탐산나트륨, 국간장, 후추, 양파, 생강, 고추씨, 감초, 연잎, 진피, 오가피, 우유, 대두, 밀, 쇠고기, 닭고기',
   };
 
   constructor(props){
@@ -31,16 +33,16 @@ export default class FlatListBasics extends Component {
 
   render() {
     return (
-//      <ScrollView>
+
           <View style={styles.screensize}>
+                  <ScrollView>
       <View style={styles.container}>
         <View style={styles.imagecontainer}>
         <Image 
  //         source={{uri: this.state.imgurl}}
           //source={{uri: "https://beginveganscrapdata.s3.ap-northeast-2.amazonaws.com/pd_img/[삼양라면]라면의 원조 컵 불닭볶음면 70g30개, 신세계적 쇼핑포털 SSG.COM.jpg"}}
          style={styles.image}
-            source={{uri:"http://blogfiles.naver.net/MjAxOTA3MTNfMTU2/MDAxNTYzMDE5Nzk1ODQ3.2aoX0a0GC2sQrIGGjGFIsIRnuuWwJnJmNpGCFzuWEskg.74YmogrHAgIw6XcirrZ6oXbv0wYr30Rom9WAzSBZbEMg.JPEG.megaeagel9523/%EA%B3%A0%EC%98%81%EC%88%99_%EA%B0%88%EB%B9%84%ED%83%95_%EC%9B%90%EC%9E%AC%EB%A3%8C%EB%AA%85_%EB%B0%8F_%ED%95%A8%EB%9F%89.JPG"}}
-          ></Image>
+            source={{uri: this.props.img}}></Image>
         </View>
 
 
@@ -81,14 +83,14 @@ export default class FlatListBasics extends Component {
 
         <View style={styles.matContainer}>
             <Text style={{fontSize:30, fontFamily: 'Ys', width: constants.width/2,}}> 원재료 </Text>
-            <Text style={{fontSize:14, fontFamily: 'Ys', width: constants.width/2,}}>소갈비, 소고기, 무, 대파, 쇠고기육수, 정제소금, 마늘, L-글루탐산나트륨, 국간장, 후추, 양파, 생강, 고추씨, 감초, 연잎, 진피, 오가피, 우유, 대두, 밀, 쇠고기, 닭고기</Text>
+            <Text style={{fontSize:14, fontFamily: 'Ys', width: constants.width/2,}}>밀, 감자전분, 팜유, 변성전분, 정제염, 아채조미추출물, 산도조절제, 올리고녹차풍미액, 비타민B2, 소고기맛베이스, 매콤양념분말, 간장양념분말, 정백당, 볶음양념분, 조미소고기분말, 간장분말, 후추가루, 조미홍고추분말, 5-리보뉴클레오티드이나트륨, 호박산이나트륨, 대두단백, 건파, 건청경채, 건표고버섯, 건당근, 건고추, 밀, 대두, 돼지고기, 계란, 쇠고기</Text>
           </View>
 
 
-          <View style={{backgroundColor:"white", flex:0.5, paddingTop: 15, justifyContent:"center"}}>
-          <View style={{backgroundColor:'white', justifyContent:'center', alignContent:'center', alignItems :'center', width: constants.width/2,}}>
-            <Text style={{backgroundColor:'white',color:"red", fontSize:20, fontFamily: 'Ys'}}> 조인성님에게 부적합 </Text>
-          </View>
+          <View style={{backgroundColor:"white", flex:0.5, paddingTop: 15, paddingLeft:15, justifyContent:"center", height: constants.height*(1/5)}}>
+            <View style={{backgroundColor:'white', justifyContent:'center', alignContent:'center', width: constants.width/2, height: constants.height*(1/5)}}>
+            <Text style={{backgroundColor:'white',color:"red", fontSize:20, fontFamily: 'Ys', }}> 조인성님에게 부적합 </Text>
+            </View>
           {/* <View style={styles.starContainer}>
 
             <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
@@ -105,8 +107,9 @@ export default class FlatListBasics extends Component {
 
 
       </View>
+      </ScrollView>
           </View>
-//      </ScrollView>
+
     );
   }
 }
@@ -179,10 +182,10 @@ const styles = StyleSheet.create({
   matContainer:{
     backgroundColor: "white",
     width: constants.width/2,
-    height: constants.height*(1/5),
+    height: constants.height,
     justifyContent: 'flex-start',
-    paddingRight:5,
-    paddingLeft:5,
+//    paddingRight:5,
+//    paddingLeft:5,
     paddingTop:15,
   },
 
@@ -191,6 +194,8 @@ const styles = StyleSheet.create({
     width: constants.width,
  //   flex: 3,
     flexDirection: 'row',
+    paddingRight:15,
+    paddingLeft:15,
 //    alignItems: 'center',
 //   justifyContent: "flex-end"
   }

@@ -6,17 +6,18 @@ import constants from "../../constants";
 import Loader from "../../components/Loader";
 import * as Permissions from "expo-permissions";
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity, Platform } from "react-native";
-import styles from "../../styles";
+import { TouchableOpacity, Platform, Image, StyleSheet, View } from "react-native";
+import custom from "../../styles";
 import axios from "axios";
 import Photo from "./Photo";
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
-const View = styled.View`
+const SView = styled.View`
   flex: 1;
   justify-content: center;  
   align-items: center;
-  backgroundColor: ${styles.green};
+  backgroundColor: ${custom.green};
 `;
 
 const Icon = styled.View``;
@@ -37,6 +38,9 @@ export default ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(false);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [takeP,setTakeP] = useState(false);
+  const [tmpload,setTmpload] = useState(false);
+  const [img,setImg] = useState();
+  const [spinner, setSpinner] = useState(false);
 
   const takePhoto = async () => {
     if (!canTakePhoto) {
@@ -51,10 +55,11 @@ export default ({ navigation }) => {
       console.log(uri)
  //     const asset = await MediaLibrary.createAssetAsync(uri);
  //     console.log(asset);
-
+      setImg(uri)
       const formData = new FormData()
       formData.append("img", uri)
-      axios.post("http://tj-rest-server-dev.ap-northeast-2.elasticbeanstalk.com/BeginVegan/materials/", formData, {
+//      axios.post("http://tj-rest-server-dev.ap-northeast-2.elasticbeanstalk.com/BeginVegan/materials/", formData, {
+        axios.post("http://localhost:8000/BeginVegan/materials", formData, {
         headers: {
           "content-type": "multipart/form-data"
         }
@@ -66,7 +71,15 @@ export default ({ navigation }) => {
     .catch(function (response) {
         //handle error
         setTakeP(true);
-        console.log(response);
+        setSpinner(true)
+        setTimeout(()=>{
+          
+          setTmpload(true);
+          console.log(response);
+        },
+          8000
+        );
+
     });
     } catch (e) {
       console.log(e);
@@ -102,7 +115,7 @@ export default ({ navigation }) => {
 
   
   return (
-    <View>
+    <SView>
       {loading ? (
         <Loader />
       ) : hasPermission ? (
@@ -134,19 +147,53 @@ export default ({ navigation }) => {
                 />
               </Icon>
             </TouchableOpacity>
-          </Camera> :
+          </Camera> : !tmpload ?
 
-          <Photo></Photo>
+          <View style ={styles.screensize}>
+                    <Spinner
+                      visible={spinner}
+                      textContent={'Loading...'}
+                      textStyle={styles.spinnerTextStyle}
+                    />
+          {/* <Image 
+            source = {require("../../assets/loading.png")}
+            style = {{
+              backgroundColor: "white",
+              width: constants.width/5,
+              height: constants.height*(3/4) ,
+              resizeMode: "contain",
+          }}
+          ></Image> */}
+          </View> :
+
+          <Photo img = {img}></Photo>
           }
 
 
-          <View>
+          <SView>
             <TouchableOpacity onPress={takePhoto} disabled={!canTakePhoto}>
               <Button />
             </TouchableOpacity>
-          </View>
+          </SView>
         </>
       ) : null}
-    </View>
+    </SView>
   );
 };
+
+
+const styles = StyleSheet.create({
+
+  screensize: {
+//    justifyContent: "flex-end",
+    backgroundColor:"white",
+    padding: 15,
+    width: constants.width,
+    height: constants.height *(3/4),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  spinnerTextStyle: {
+    color: '#FFF'
+  },
+})

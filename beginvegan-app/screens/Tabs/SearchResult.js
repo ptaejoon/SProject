@@ -6,6 +6,7 @@ import { faSeedling, faCheese, faEgg, faFish, faDrumstickBite, faBacon, faLessTh
 import {Ionicons, Entypo} from "@expo/vector-icons";
 import axios from "axios";
 import custom from "../../styles";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class FlatListBasics extends Component {
 
@@ -19,6 +20,7 @@ export default class FlatListBasics extends Component {
     meatflag: false,
     imgurl: 'https://ak8.picdn.net/shutterstock/videos/1009250978/thumb/1.jpg',
     materails: '',
+    star_idx: -1,
   };
 
   constructor(props){
@@ -62,6 +64,13 @@ export default class FlatListBasics extends Component {
 //      console.log(this.state.data.Mat[i].material.name)
     }
 //    console.log(this.state.materials)
+  }
+
+  change_rating= (idx)=>{
+    if(this.state.star_idx==idx)
+      this.setState({star_idx:-1})
+    else
+      this.setState({star_idx:idx})
   }
 
   render() {
@@ -127,12 +136,21 @@ export default class FlatListBasics extends Component {
             <Text style={{backgroundColor:'white',color:"green", fontSize:20, fontFamily: 'Ys'}}> 조인성님에게 적합 </Text>
           </View>
           <View style={styles.starContainer}>
-
-            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
-            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
-            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
-            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
-            <Ionicons name={"ios-star-outline"} color={"black"} size={30}/> 
+            <TouchableOpacity onPress = {()=>this.change_rating(1)}>
+              {this.state.star_idx >= 1 ? <Ionicons name={"ios-star-outline"} color={custom.green} size={30}/> : <Ionicons name={"ios-star-outline"} color={"black"} size={30}/>}
+            </TouchableOpacity>
+            <TouchableOpacity onPress = {()=>this.change_rating(2)}>
+              {this.state.star_idx >= 2 ? <Ionicons name={"ios-star-outline"} color={custom.green} size={30}/> : <Ionicons name={"ios-star-outline"} color={"black"} size={30}/>} 
+            </TouchableOpacity>
+            <TouchableOpacity onPress = {()=>this.change_rating(3)}>
+              {this.state.star_idx >= 3 ? <Ionicons name={"ios-star-outline"} color={custom.green} size={30}/> : <Ionicons name={"ios-star-outline"} color={"black"} size={30}/>} 
+            </TouchableOpacity>
+            <TouchableOpacity onPress = {()=>this.change_rating(4)}>
+              {this.state.star_idx >= 4 ? <Ionicons name={"ios-star-outline"} color={custom.green} size={30}/> : <Ionicons name={"ios-star-outline"} color={"black"} size={30}/>} 
+            </TouchableOpacity>
+            <TouchableOpacity onPress = {()=>this.change_rating(5)}>
+              {this.state.star_idx >= 5 ? <Ionicons name={"ios-star-outline"} color={custom.green} size={30}/> : <Ionicons name={"ios-star-outline"} color={"black"} size={30}/>}
+            </TouchableOpacity> 
 
           </View>          
           </View>

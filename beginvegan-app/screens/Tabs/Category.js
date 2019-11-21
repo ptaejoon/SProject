@@ -36,7 +36,7 @@ export default () => (
             {/* <Box> */}
             <View style={styles.textWraper}>
             <TouchableOpacity>
-            <Image source={{uri: "https://cdn.onlinewebfonts.com/svg/img_354378.png"}} 
+            <Image source={require("../../assets/veg.png")} 
             style={styles.image}
             />
             </TouchableOpacity>
