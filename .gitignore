@@ -5,3 +5,5 @@ test.py
 user_dic.txt
 temp_imgs
 google_beginvegan_secret.json
+node_modules
+django_venv
