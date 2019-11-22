@@ -2,7 +2,7 @@ def sim_msd(data, name1, name2):  #유저간의 유사도 측정
     sum = 0
     count = 0
     for movies in data[name1]:
-        if movies in data[name2]: #같은 영화를 봤다면
+        if movies in data[name2]: #같은 음식을 먹었다면
             sum += pow(data[name1][movies]- data[name2][movies], 2)
             count += 1
 
@@ -31,8 +31,8 @@ def getRecommendation (data, person, k=3, sim_function=sim_msd):
         print(sim, name)
         if sim < 0 : continue #유사도가 양수인 사람만
         for movie in data[name]: 
-            if movie not in data[person]: #name이 평가를 내리지 않은 영화
-                score += sim * data[name][movie] # 그사람의 영화평점 * 유사도
+            if movie not in data[person]: #name이 평가를 내리지 않은 음식
+                score += sim * data[name][movie] # 그사람의 음식평점 * 유사도
                 score_dic.setdefault(movie, 0) # 기본값 설정
                 score_dic[movie] += score # 합계 구함
 
@@ -40,7 +40,7 @@ def getRecommendation (data, person, k=3, sim_function=sim_msd):
                 sim_dic.setdefault(movie, 0) 
                 sim_dic[movie] += sim
 
-            score = 0  #영화가 바뀌었으니 초기화한다
+            score = 0  #초기화
     
     for key in score_dic: 
         score_dic[key] = score_dic[key] / sim_dic[key] # 평점 총합/ 유사도 총합
